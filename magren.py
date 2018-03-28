@@ -153,8 +153,6 @@ def get_norm_tri(vert, tri, idx):
     x1 = vert[tri[idx,0],:]
     x2 = vert[tri[idx,1],:]
     x3 = vert[tri[idx,2],:]
-
-    centeroid  = (x1 + x2 + x3)/3
     
     v1 = x1 - x2
     v2 = x1 - x3
@@ -187,24 +185,6 @@ def get_normal_vectors(vert, tri):
         vec_list.append(norm_vec[i,:].tolist())
     
     return NormalVectors(len(vec_list), *vec_list)
-
-def create_isosurf(folder):
-    vert, tri, phi, _ = get_isosurf(folder)
-    objects = []
-    cmap = plt.get_cmap("plasma")
-    phi += np.pi
-    phi /= 2 * np.pi 
-
-    
-    for i in range(tri.shape[0]):
-        r, g, b, _ = cmap(phi[i])  
-        objects.append(Triangle(vert[tri[i,0],:],
-                                vert[tri[i,1],:],
-                                vert[tri[i,2],:],
-                                Texture( Pigment( 'color', [r,g,b]))  ))
-    return objects
-        
-
 
 def create_isomesh(folder, vis_area=Box([0,0,0], [0, 0, 0], "inverse")):
     vert, tri,_, phi = get_isosurf(folder)
