@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#!/usr/local/bin/python
 from librender import *
 
 def get_args():
